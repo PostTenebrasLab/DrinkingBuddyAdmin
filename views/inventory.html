@@ -1,0 +1,15 @@
+
+
+<md-list>
+  <md-list-item class="md-2-line" ng-repeat="item in items">
+    <!--<md-checkbox ng-model="item.active"></md-checkbox>-->
+    <div class="md-list-item-text">
+      <h3>{{item.name}}</h3>
+      <p>
+      		{{item.quantity}} 
+      </p>
+			<md-button ng-click="incQuantity(item)">+</md-button>
+			<md-button ng-click="decQuantity(item)">-</md-button>
+    </div>
+  </md-list-item>
+</md-list>
