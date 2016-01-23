@@ -7,6 +7,7 @@
   	<link rel="stylesheet" type="text/css" href="bower_components/angular-material/angular-material.min.css"/>
   	<link rel="stylesheet" type="text/css" href="bower_components/angular-material/modules/js/icon/icon.min.css"/>
   	<link rel="stylesheet" type="text/css" href="bower_components/angular-material/modules/js/icon/icon-default-theme.min.css"/>	
+  	<link rel="stylesheet" type="text/css" href="fonts/material-icons.css"/>
 	<script src="bower_components/angular/angular.min.js"></script>
 	<script src="bower_components/angular-resource/angular-resource.min.js"></script>
 	<script src="bower_components/angular-animate/angular-animate.min.js"></script>
@@ -20,11 +21,11 @@
 	
 </head>
 <body layout="row" ng-cloak>
-	<md-sidenav layout="column" md-is-locked-open='true'>
-   		<header>		        
-		    <h1 class="md-heading">DrinkingBuddy Admin</h1>		      
-		</header>
-		<md-content flex role="navigation">
+	<md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-is-locked-open='true'>
+   		<md-toolbar>		        
+		    <h1 class="md-toolbar-tools">DrinkingBuddy Admin</h1>		      
+		</md-toolbar>
+		<md-content layout-padding flex role="navigation">
 			<ul>
 				<li><a href="#/Inventory">Inventory</a></li>
 				<li><a href="#/Transactions">Transactions</a></li>

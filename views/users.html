@@ -1,7 +1,39 @@
-<div layout="row">
-	<div ng-repeat="user in users" flex>
-			<md-card>
-			{{user.name}} {{user.balance / 10}}
-			</md-card>
+ <md-content class="md-padding" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="50" layout="column">
+		<md-card ng-show="user">					    
+		    <md-card-title>
+			  	<md-card-title-text>
+			        <span class="md-headline">Edit user</span>
+		            <span class="md-subhead"></span>
+	            	<p>{{user.name}}</p>
+	            	<md-input-container>
+	      				<label>Balance</label>
+	      				<input ng-model="user.balance">
+	    			</md-input-container>
+		            
+	          	</md-card-title-text>		          
+	        </md-card-title>
+		        <md-card-actions layout="row" layout-align="end center" ng-show="edited()">
+		          <md-button ng-click="cancelEdit()">CANCEL</md-button>
+		          <md-button>SAVE</md-button>
+		        </md-card-actions>
+		</md-card>
 	</div>
-</div>
+</md-content>
+<md-list layout-padding ng-hide="user">
+  <md-list-item class="md-2-line" ng-repeat="user in users">
+      <!--<md-checkbox ng-model="item.active"></md-checkbox>-->
+   			
+      <div class="md-list-item-text"
+        <h3>{{user.name}}</h3>
+        <p>
+            {{user.balance}}
+        </p>
+      </div>      
+		<md-button class="md-icon-button" ng-click="editUser(user)">
+	        <md-icon class="material-icons">edit</md-icon>
+	  	</md-button>  
+  	</md-list-item>
+</md-list>
+
+

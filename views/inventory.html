@@ -1,15 +1,51 @@
 
 
-<md-list>
+<md-list layout-padding>
   <md-list-item class="md-2-line" ng-repeat="item in items">
-    <!--<md-checkbox ng-model="item.active"></md-checkbox>-->
-    <div class="md-list-item-text">
-      <h3>{{item.name}}</h3>
-      <p>
-      		{{item.quantity}} 
-      </p>
-			<md-button ng-click="incQuantity(item)">+</md-button>
-			<md-button ng-click="decQuantity(item)">-</md-button>
-    </div>
+      <!--<md-checkbox ng-model="item.active"></md-checkbox>-->
+   			
+      <div class="md-list-item-text"
+        <h3>{{item.name}}</h3>
+        <p>
+            <md-input-container>
+              <label>Quantity</label>
+              <input ng-model="item.quantity" ng-model-options="{ debounce: 1000 }" ng-change="item.$save()">
+            </md-input-container>
+        </p>
+      </div>
+      <!--
+  		<md-button class="md-secondary md-icon-button" ng-click="decQuantity(item)" ng-disabled="item.quantity == 0">
+        <md-tooltip md-direction="bottom">
+          Retirer...
+        </md-tooltip>
+        <md-icon class="material-icons">remove_circle</md-icon>
+      </md-button>
+      -->
+    <md-menu>
+      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">        
+        <md-icon md-menu-origin class="material-icons">more_vert</md-icon>
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item>
+          <md-button>
+            <md-icon class="material-icons">dialpad</md-icon>
+            Redial
+          </md-button>
+        </md-menu-item>
+        <md-menu-item>
+          <md-button disabled="disabled">
+            <md-icon class="material-icons">voicemail</md-icon>
+            Check voicemail
+          </md-button>
+        </md-menu-item>
+        <md-menu-divider></md-menu-divider>
+        <md-menu-item>
+          <md-button>
+            <md-icon class="material-icons">edit</md-icon>
+            Edit
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
   </md-list-item>
 </md-list>

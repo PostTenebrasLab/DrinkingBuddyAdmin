@@ -40,6 +40,7 @@ app.controller("UsersController", ["$scope", "$resource", "$http", function($sco
 			}
 		];
 
+
 		var User = $resource(APP_HOST + '/users/:user_id',
 			{user_id:'@id'}
 		);
@@ -55,11 +56,51 @@ app.controller("UsersController", ["$scope", "$resource", "$http", function($sco
 			
 		});
 
+		$scope.editUser = function(user){
+			$scope.user = user;
+			$scope.userOriginal = angular.copy(user);
+		}
+
+		$scope.cancelEdit = function(){
+			$scope.user.name = $scope.userOriginal.name;
+			$scope.user.balance = $scope.userOriginal.balance;
+			$scope.user = null;
+		}
+
+		$scope.edited = function(){
+			return !angular.equals($scope.user, $scope.userOriginal);
+		}
+
+/*
+		$scope.editBalance = function(ev, user) {
+		    // Appending dialog to document.body to cover sidenav in docs app
+		    var confirm = $mdDialog.confirm()
+		          .title('Would you like to delete your debt?')
+		          .textContent('All of the banks have agreed to forgive you your debts.')
+		          .ariaLabel('Lucky day')
+		          .targetEvent(ev)
+		          .ok('Please do it!')
+		          .cancel('Sounds like a scam');
+		    $mdDialog.show(confirm).then(function() {
+		      $scope.status = 'You decided to get rid of your debt.';
+		    }, function() {
+		      $scope.status = 'You decided to keep your debt.';
+		    });
+		};
+*/		
 }]);
 
 
 app.controller("InventoryController", ["$scope", "$resource", "$http", function($scope, $resource, $http){
 	//fill with data for example
+
+    var originatorEv;
+
+    this.openMenu = function($mdOpenMenu, ev) {
+      originatorEv = ev;
+      $mdOpenMenu(ev);
+    };
+
 	$scope.items = [
 		{
 			id: 1,
@@ -99,4 +140,5 @@ app.controller("InventoryController", ["$scope", "$resource", "$http", function(
 				item.quantity -= 1;
 		item.$save();
 	}
+
 }]);
