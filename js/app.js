@@ -1,4 +1,4 @@
-var app = angular.module('DrinkingBuddyAdmin', ['ngRoute','ngMaterial']);
+var app = angular.module('DrinkingBuddyAdmin', ['ngRoute','ngMaterial','ngResource']);
 
 
 app.config(function($mdThemingProvider){
@@ -31,7 +31,7 @@ app.controller('MainController', function($scope, $route, $routeParams, $locatio
 	$scope.$routeParams = $routeParams;
 });
 
-app.controller("UsersController", ["$scope", function($scope){
+app.controller("UsersController", ["$scope", "$resource", "$http", function($scope, $resource, $http){
 		$scope.users = [
 			{
 				id: 1,
@@ -40,11 +40,26 @@ app.controller("UsersController", ["$scope", function($scope){
 			}
 		];
 
+		var User = $resource(APP_HOST + '/users/:user_id',
+			{user_id:'@id'}
+		);
+
+		$http.get(APP_HOST + '/users').then(function(response){			
+			var data = response.data;
+			var users = [];
+			
+			for(var i in data){
+				users.push(new User(data[i]));
+			}
+			$scope.users = users;
+			
+		});
+
 }]);
 
 
-app.controller("InventoryController", ["$scope", function($scope){
-
+app.controller("InventoryController", ["$scope", "$resource", "$http", function($scope, $resource, $http){
+	//fill with data for example
 	$scope.items = [
 		{
 			id: 1,
@@ -60,12 +75,28 @@ app.controller("InventoryController", ["$scope", function($scope){
 		}
 	];
 
+
+	var Beverage = $resource(APP_HOST + '/beverages/:beverage_id',
+		{beverage_id:'@id'}
+	);
+
+	$http.get(APP_HOST + '/beverages').then(function(response){
+		var data = response.data;
+		var beverages = [];
+		for(var i in data){
+			beverages.push(new Beverage(data[i]));
+		}
+		$scope.items = beverages;
+	});
+
 	$scope.incQuantity = function(item){
 		item.quantity += 1;
+		item.$save();
 	}
 
 	$scope.decQuantity = function(item){
 		if(item.quantity > 0)
 				item.quantity -= 1;
+		item.$save();
 	}
 }]);

@@ -1,1 +1,1 @@
-APP_HOST = "localhost:3000";
+APP_HOST = "http://localhost:5000";
