@@ -22,6 +22,11 @@ app.config(function($routeProvider, $locationProvider){
 		controller: 'UsersController'
 	});
 
+
+	$routeProvider.when('/Transactions', {
+		templateUrl: 'views/transactions.html',
+		controller: 'TransactionsController'
+	});
 	//$locationProvider.html5Mode(true);
 });
 
@@ -140,5 +145,43 @@ app.controller("InventoryController", ["$scope", "$resource", "$http", function(
 				item.quantity -= 1;
 		item.$save();
 	}
+
+}]);
+
+
+app.controller("TransactionsController", ["$scope", "$resource", "$http", function($scope, $resource, $http){
+	//fill with data for example
+    
+	$scope.transactions = [
+		{
+			id: 1,
+			date: "2016-01-17 19:50:10",
+			value: 15,
+			user_id: 1,
+			element_id: 1,			
+		},
+		{
+			id: 1,
+			date: "2016-01-17 23:00:00",
+			value: 15,
+			user_id: 1,
+			element_id: 2,
+		}
+	];
+
+
+	var Transaction = $resource(APP_HOST + '/transactions/:transaction_id',
+		{transaction_id:'@id'}
+	);
+
+	$http.get(APP_HOST + '/transactions').then(function(response){
+		var data = response.data;
+		var transactions = [];
+		for(var i in data){
+			transactions.push(new Transaction(data[i]));
+		}
+		$scope.transactions = transactions;
+	});
+	
 
 }]);
