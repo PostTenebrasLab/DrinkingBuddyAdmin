@@ -146,6 +146,24 @@ app.controller("InventoryController", ["$scope", "$resource", "$http", function(
 		item.$save();
 	}
 
+	$scope.save = function(){
+		$scope.beverage.$save();
+		$scope.beverageOriginal = angular.copy($scope.beverage);
+		$scope.beverage = null;
+	}
+
+	$scope.edited = function(){
+		return !angular.equals($scope.beverage, $scope.beverageOriginal);
+	}
+
+	$scope.editInventory = function(beverage){
+		$scope.beverage = beverage;
+		$scope.beverageOriginal = angular.copy(beverage);
+	}
+
+	$scope.addInventory = function(){
+		$scope.beverage = new Beverage();
+	}
 }]);
 
 

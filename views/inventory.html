@@ -1,4 +1,31 @@
+<md-button ng-click="addInventory()">
+  <md-icon class="material-icons">create</md-icon> Add
+</md-button>  
 
+ <md-content class="md-padding" layout-xs="column" layout="row">
+    <div flex-xs flex-gt-xs="50" layout="column">
+    <md-card ng-show="beverage">              
+        <md-card-title>
+          <md-card-title-text>
+              <span class="md-headline">Edit inventory</span>
+                <span class="md-subhead"></span>                
+                <md-input-container>
+                  <label>Name</label>
+                  <input ng-model="beverage.name">
+                </md-input-container>
+                <md-input-container>
+                  <label>Quantity</label>
+                  <input ng-model="beverage.quantity">
+                </md-input-container>
+              </md-card-title-text>             
+          </md-card-title>
+            <md-card-actions layout="row" layout-align="end center">
+              <md-button ng-show="edited()" ng-click="save()" class="md-primary">SAVE</md-button>
+              <md-button ng-click="cancelEdit()">CANCEL</md-button>
+            </md-card-actions>
+    </md-card>
+  </div>
+</md-content>
 
 <md-list layout-padding>
   <md-list-item class="md-2-line" ng-repeat="item in items">
@@ -13,6 +40,9 @@
             </md-input-container>
         </p>
       </div>
+      <md-button class="md-icon-button" ng-click="editInventory(item)">
+        <md-icon class="material-icons">edit</md-icon>
+      </md-button>  
       <!--
   		<md-button class="md-secondary md-icon-button" ng-click="decQuantity(item)" ng-disabled="item.quantity == 0">
         <md-tooltip md-direction="bottom">
@@ -21,31 +51,6 @@
         <md-icon class="material-icons">remove_circle</md-icon>
       </md-button>
       -->
-    <md-menu>
-      <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="$mdOpenMenu($event)">        
-        <md-icon md-menu-origin class="material-icons">more_vert</md-icon>
-      </md-button>
-      <md-menu-content width="4">
-        <md-menu-item>
-          <md-button>
-            <md-icon class="material-icons">dialpad</md-icon>
-            Redial
-          </md-button>
-        </md-menu-item>
-        <md-menu-item>
-          <md-button disabled="disabled">
-            <md-icon class="material-icons">voicemail</md-icon>
-            Check voicemail
-          </md-button>
-        </md-menu-item>
-        <md-menu-divider></md-menu-divider>
-        <md-menu-item>
-          <md-button>
-            <md-icon class="material-icons">edit</md-icon>
-            Edit
-          </md-button>
-        </md-menu-item>
-      </md-menu-content>
-    </md-menu>
+
   </md-list-item>
 </md-list>
