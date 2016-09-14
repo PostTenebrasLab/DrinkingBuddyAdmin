@@ -1,1 +1,1 @@
-APP_HOST = "http://localhost:5000";
+APP_HOST = "http://drinkingbuddy.lan.posttenebraslab.ch/";
