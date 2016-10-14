@@ -103,6 +103,12 @@ app.controller("UsersController", ["$scope", "$resource", "$http", function($sco
 			$scope.userOriginal = angular.copy(user);
 		}
 
+		$scope.save = function(){
+			$scope.user.$save();
+			$scope.userOriginal = angular.copy($scope.user);
+			$scope.user = null;
+		}		
+
 		$scope.cancelEdit = function(){
 			$scope.user.name = $scope.userOriginal.name;
 			$scope.user.balance = $scope.userOriginal.balance;
